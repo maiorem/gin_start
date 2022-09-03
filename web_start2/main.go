@@ -11,14 +11,16 @@ func (f *fooHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello, foo!")
 }
 
+func barHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello bar!")
+}
+
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, "Hello World")
 	})
 
-	http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello bar!")
-	})
+	http.HandleFunc("/bar", barHandler)
 
 	http.Handle("/foo", &fooHandler{})
 
