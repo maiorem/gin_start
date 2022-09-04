@@ -14,6 +14,10 @@ type User struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello World")
+}
+
 type fooHandler struct{}
 
 func (f *fooHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -44,9 +48,8 @@ func barHandler(w http.ResponseWriter, r *http.Request) {
 
 func NewHttpHandler() http.Handler {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello World")
-	})
+
+	mux.HandleFunc("/", indexHandler)
 
 	mux.HandleFunc("/bar", barHandler)
 
