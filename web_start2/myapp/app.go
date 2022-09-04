@@ -54,5 +54,6 @@ func NewHttpHandler() http.Handler {
 	mux.HandleFunc("/bar", barHandler)
 
 	mux.Handle("/foo", &fooHandler{})
+
 	return mux
 }
